@@ -1,0 +1,25 @@
+<ng-container *ngIf="isLoading; else showUsers">
+    <h3>Loading ...............</h3>
+</ng-container>
+<ng-template #showUsers>
+    <ng-container *ngIf="users.length > 0; else noUsers">
+        <h3>{{msg}}</h3>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Email Id</th>
+                <th>Phone</th>
+            </tr>
+            <tr *ngFor="let user of users">
+                <td>{{user.name}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.phone}}</td>
+            </tr>
+        </table>
+    </ng-container>
+    
+    <ng-template #noUsers>
+        <h5>No users found</h5>
+    </ng-template>
+</ng-template>
+

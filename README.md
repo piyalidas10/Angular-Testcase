@@ -3,6 +3,9 @@
 ### Components Testacse
 1. user
 
+### Directives Testacse
+1. Bgcolor change Directive on click
+2. Bgcolor change Directive on mouse hover and mouse out
 
 ### Pipes Testacse
 1. truncate

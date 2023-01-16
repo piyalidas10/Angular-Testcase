@@ -7,12 +7,16 @@ import { HttpClientModule } from '@angular/common/http';
 import { UsersComponent } from './components/users/users.component';
 import { ApiService } from './services/api.service';
 import { ApiTestbedService } from './services/api-testbed.service';
+import { ClickBgcolorChangeDirective } from './directives/click-bgcolor-change.directive';
+import { MouseBgcolorChangeDirective } from './directives/mouse-bgcolor-change.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     TruncatePipe,
-    UsersComponent
+    UsersComponent,
+    ClickBgcolorChangeDirective,
+    MouseBgcolorChangeDirective
   ],
   imports: [
     BrowserModule,

@@ -9,6 +9,7 @@ import { ApiService } from './services/api.service';
 import { ApiTestbedService } from './services/api-testbed.service';
 import { ClickBgcolorChangeDirective } from './directives/click-bgcolor-change.directive';
 import { MouseBgcolorChangeDirective } from './directives/mouse-bgcolor-change.directive';
+import { TrackingDirective } from './directives/tracking/tracking.directive';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { MouseBgcolorChangeDirective } from './directives/mouse-bgcolor-change.d
     TruncatePipe,
     UsersComponent,
     ClickBgcolorChangeDirective,
-    MouseBgcolorChangeDirective
+    MouseBgcolorChangeDirective,
+    TrackingDirective
   ],
   imports: [
     BrowserModule,

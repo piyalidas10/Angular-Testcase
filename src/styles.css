@@ -1,1 +1,29 @@
 /* You can add global styles to this file, and also import other style files */
+.tooltip-container {
+  position: relative;
+}
+.tooltip {
+    background: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    line-height: 1;
+    font-size: 14px;
+    padding: 5px 7px;
+    border-radius: 5px;
+    position: absolute;
+    top: -2px;
+    display: inline-block;
+    white-space: nowrap;
+  }
+  .tooltip:before {
+    position: absolute;
+    content: ' ';
+    top: 50%;
+    margin-top: -5px;
+    left: -5px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 5px 5px 5px 0;
+    border-color: transparent rgba(0, 0, 0, 0.7) transparent transparent;
+    display: block;
+  }

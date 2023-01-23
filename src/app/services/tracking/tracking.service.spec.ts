@@ -56,11 +56,11 @@ describe('TrackingService', () => {
     });
     service.track('test-API', '', mockTrackEvent.customValue);
     httpClientSpy.post.and.returnValue(of(errorResponse)); // call http post method and get return
-    // service['callToTrackAPI'](mockTrackEvent).subscribe(
-    //   err => {
-    //     expect(err).toBe(errorResponse);
-    //   }
-    // );
+    service['callToTrackAPI'](mockTrackEvent).subscribe(
+      err => {
+        expect(err).toEqual(errorResponse);
+      }
+    );
   });
 
   it('should be called track method with cutomValue with success', () => {
@@ -70,10 +70,10 @@ describe('TrackingService', () => {
     });
     service.track('test-API', '', mockTrackEvent.customValue);
     httpClientSpy.post.and.returnValue(of(successResponse)); // call http post method and get return
-    // service['callToTrackAPI'](mockTrackEvent).subscribe(
-    //   data => {
-    //     expect(data).toBe(successResponse);
-    //   }
-    // );
+    service['callToTrackAPI'](mockTrackEvent).subscribe(
+      data => {
+        expect(data).toEqual(successResponse);
+      }
+    );
   });
 });

@@ -11,6 +11,9 @@ import { TrackingDirective } from './directives/tracking/tracking.directive';
 import { ClickBgcolorChangeDirective } from './directives/click-bgcolor-change/click-bgcolor-change.directive';
 import { MouseBgcolorChangeDirective } from './directives/mouse-bgcolor-change/mouse-bgcolor-change.directive';
 import { TooltipDirective } from './directives/tooltip/tooltip.directive';
+import { TitlePipe } from './pipes/title/title.pipe';
+import { DataRangePipe } from './pipes/data-range/data-range.pipe';
+import { DateConverterPipe } from './pipes/date-converter/date-converter.pipe';
 
 @NgModule({
   declarations: [
@@ -20,7 +23,10 @@ import { TooltipDirective } from './directives/tooltip/tooltip.directive';
     ClickBgcolorChangeDirective,
     MouseBgcolorChangeDirective,
     TrackingDirective,
-    TooltipDirective
+    TooltipDirective,
+    TitlePipe,
+    DataRangePipe,
+    DateConverterPipe
   ],
   imports: [
     BrowserModule,

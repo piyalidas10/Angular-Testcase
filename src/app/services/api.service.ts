@@ -12,7 +12,7 @@ export class ApiService {
 
   getUsers(): Observable<User[]> {
     this.users = this.http
-      .get<User[]>(`https://jsonplaceholder.typicode.com/user`)
+      .get<User[]>(`https://jsonplaceholder.typicode.com/users`)
     return this.users;
   }
 }

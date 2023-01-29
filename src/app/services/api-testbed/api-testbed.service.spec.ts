@@ -1,8 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 
 import { ApiTestbedService } from './api-testbed.service';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { HttpClient } from '@angular/common/http';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { of } from 'rxjs';
 import { mockUsers } from '../../mockdata/users';
 
@@ -17,7 +17,6 @@ import { mockUsers } from '../../mockdata/users';
 */
 describe('ApiTestbedService', () => {
   let service: ApiTestbedService;
-  // let httpController: HttpTestingController;
   let httpClientSpy: jasmine.SpyObj<HttpClient>;
 
   beforeEach(() => {
@@ -34,7 +33,6 @@ describe('ApiTestbedService', () => {
     });
     service = TestBed.inject(ApiTestbedService);
     httpClientSpy = TestBed.inject(HttpClient) as jasmine.SpyObj<HttpClient>;
-    // httpController = TestBed.inject(HttpTestingController);
   });
 
   it('should be created', () => {
@@ -42,32 +40,23 @@ describe('ApiTestbedService', () => {
   });
 
   describe('getUsers()', () => {
-    it('getUsers() with success', () => {
+    it('getUsers() with success should return data', () => {
       httpClientSpy.get.and.returnValue(of(mockUsers)); // call http get method
       service.getUsers().subscribe((data) => { // now have to subscribe getUsers method to get data
         expect(data).toEqual(mockUsers);
       });
       expect(httpClientSpy.get).toHaveBeenCalledTimes(1);
     });
-    // it('getUsers() should be called', () => {
-    //   service.getUsers().subscribe((data) => { // now have to subscribe getUsers method to get data
-    //     expect(data).toEqual(mockUsers);
-    //   });
-    //   httpController.expectOne({
-    //     method: 'GET'
-    //   }).flush(mockUsers);
-    //   httpController.verify();
-    // });
-  });
-  
-  it('getUsers() return an error when the server returns a 404', () => {
-    httpClientSpy.get.and.returnValue(of({})); // call http get method
-    service.getUsers().subscribe(
-      () => {},
-      (error: any) => {
-        expect(error).toEqual(error);
-      }
-    );
-    expect(httpClientSpy.get).toHaveBeenCalledTimes(1);
+
+    it('getUsers() return an error when the server returns a 404 error', () => {
+      httpClientSpy.get.and.returnValue(of({})); // call http get method
+      service.getUsers().subscribe(
+        () => {},
+        (error: HttpErrorResponse) => {
+          expect(error).toEqual(error);
+        }
+      );
+      expect(httpClientSpy.get).toHaveBeenCalledTimes(1);
+    });
   });
 });

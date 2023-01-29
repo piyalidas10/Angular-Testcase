@@ -15,3 +15,11 @@
 2. api-testbed
 3. calculator
 4. logger
+
+
+https://github.com/angular/angular/blob/main/aio/content/examples/testing/src/app/model/hero.service.spec.ts
+
+https://braydoncoyer.dev/blog/how-to-unit-test-an-http-service-in-angular
+https://www.dotnetcurry.com/angularjs/unit-testing-angular-services
+
+

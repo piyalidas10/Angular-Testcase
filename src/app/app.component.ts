@@ -3,6 +3,7 @@ import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { FakeUser } from './models/fakeuser';
 import { User } from './models/user';
+import { ApiPostService } from './services/api-post/api-post.service';
 import { ApiTestbedService } from './services/api-testbed/api-testbed.service';
 import { FakeusersApiService } from './services/fakeusers/fakeusers-api.service';
 import { TrackingService } from './services/tracking/tracking.service';
@@ -23,7 +24,8 @@ export class AppComponent {
   constructor(
     private apiService: ApiTestbedService,
     private trackingService: TrackingService,
-    private fakeusersApiService: FakeusersApiService
+    private fakeusersApiService: FakeusersApiService,
+    private apiPostService: ApiPostService
   ) {
     this.callUsers();
     this.callFakeUsers();
@@ -122,6 +124,22 @@ export class AppComponent {
           }
         },
       });
+  }
+
+
+  createAirline() {
+    this.apiPostService
+      .createAirline()
+      .pipe(
+        catchError((error) => {
+          return throwError(() => error);
+        })
+      )
+      .subscribe({
+        next: (res) => {
+          console.log('createAirline res => ', res);
+        }
+      })
   }
     
 }

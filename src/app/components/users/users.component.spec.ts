@@ -2,7 +2,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of, throwError } from 'rxjs';
 import { mockUsers } from 'src/app/mockdata/users';
-import { ApiService } from 'src/app/services/api.service';
+import { ApiService } from 'src/app/services/api/api.service';
 
 import { UsersComponent } from './users.component';
 

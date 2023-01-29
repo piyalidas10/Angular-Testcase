@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { LoggerService } from './logger.service';
+import { LoggerService } from '../logger/logger.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CalculatorService {
+export class Calculator1Service {
 
   constructor(private logger: LoggerService) { }
 

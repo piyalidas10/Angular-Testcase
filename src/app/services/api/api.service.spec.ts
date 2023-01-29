@@ -1,7 +1,7 @@
 import { ApiService } from './api.service';
 import { HttpClient } from '@angular/common/http';
 import { of } from 'rxjs';
-import {mockUsers} from '../mockdata/users';
+import {mockUsers} from '../../mockdata/users';
 
 /*
  --------------- Testing Http Services with mock Http Client using  Jasmine Spy--------------------------

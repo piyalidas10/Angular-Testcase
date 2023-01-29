@@ -4,7 +4,7 @@ import { ApiTestbedService } from './api-testbed.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { HttpClient } from '@angular/common/http';
 import { of } from 'rxjs';
-import { mockUsers } from '../mockdata/users';
+import { mockUsers } from '../../mockdata/users';
 
 /*
  --------------- Testing Http Services with mock Http Client using TestBed--------------------------

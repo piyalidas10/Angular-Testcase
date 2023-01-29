@@ -3,7 +3,7 @@ import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { FakeUser } from './models/fakeuser';
 import { User } from './models/user';
-import { ApiTestbedService } from './services/api-testbed.service';
+import { ApiTestbedService } from './services/api-testbed/api-testbed.service';
 import { FakeusersApiService } from './services/fakeusers/fakeusers-api.service';
 import { TrackingService } from './services/tracking/tracking.service';
 

@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 
 import { CalculatorService } from './calculator.service';
-import { LoggerService } from './logger.service';
+import { LoggerService } from '../logger/logger.service';
 
 describe('CalculatorService', () => {
   let calculatorSrv: CalculatorService;

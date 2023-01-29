@@ -60,7 +60,7 @@ describe('ApiTestbedService', () => {
     // });
   });
   
-  it('getUsers() with error', () => {
+  it('getUsers() return an error when the server returns a 404', () => {
     httpClientSpy.get.and.returnValue(of({})); // call http get method
     service.getUsers().subscribe(
       () => {},

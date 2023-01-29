@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { Observable, of, throwError } from 'rxjs';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,14 @@ export class ApiTestbedService {
 
   getUsers(): Observable<any> {
     // original url : https://jsonplaceholder.typicode.com/users
-    return this.http.get<any>('https://jsonplaceholder.typicode.com/user');
+    return this.http.get<any>('https://jsonplaceholder.typicode.com/user').pipe(
+      catchError((error: HttpErrorResponse) => {
+        if (error.status === 404) {
+          return of(undefined);
+        } else {
+          return throwError(error.error);
+        }
+      })
+    );
   }
 }

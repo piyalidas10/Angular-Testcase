@@ -3,7 +3,7 @@ import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { FakeUser } from './models/fakeuser';
 import { User } from './models/user';
-import { ApiService } from './services/api.service';
+import { ApiTestbedService } from './services/api-testbed.service';
 import { FakeusersApiService } from './services/fakeusers/fakeusers-api.service';
 import { TrackingService } from './services/tracking/tracking.service';
 
@@ -21,7 +21,7 @@ export class AppComponent {
   fakeUsers: FakeUser[];
 
   constructor(
-    private apiService: ApiService,
+    private apiService: ApiTestbedService,
     private trackingService: TrackingService,
     private fakeusersApiService: FakeusersApiService
   ) {
@@ -48,6 +48,7 @@ export class AppComponent {
         )
         .subscribe({
           next: (data) => {
+            console.log('API Response => ', data);
             if (data?.length > 0) {
               console.log('API Response => ', data);
               this.customValue = {

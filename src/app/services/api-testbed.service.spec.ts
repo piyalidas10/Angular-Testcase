@@ -17,7 +17,7 @@ import { mockUsers } from '../mockdata/users';
 */
 describe('ApiTestbedService', () => {
   let service: ApiTestbedService;
-  let httpController: HttpTestingController;
+  // let httpController: HttpTestingController;
   let httpClientSpy: jasmine.SpyObj<HttpClient>;
 
   beforeEach(() => {
@@ -41,8 +41,8 @@ describe('ApiTestbedService', () => {
     expect(service).toBeTruthy();
   });
 
-  describe('getUsers', () => {
-    it('getUsers() should be called', () => {
+  describe('getUsers()', () => {
+    it('getUsers() with success', () => {
       httpClientSpy.get.and.returnValue(of(mockUsers)); // call http get method
       service.getUsers().subscribe((data) => { // now have to subscribe getUsers method to get data
         expect(data).toEqual(mockUsers);
@@ -58,5 +58,16 @@ describe('ApiTestbedService', () => {
     //   }).flush(mockUsers);
     //   httpController.verify();
     // });
+  });
+  
+  it('getUsers() with error', () => {
+    httpClientSpy.get.and.returnValue(of({})); // call http get method
+    service.getUsers().subscribe(
+      () => {},
+      (error: any) => {
+        expect(error).toEqual(error);
+      }
+    );
+    expect(httpClientSpy.get).toHaveBeenCalledTimes(1);
   });
 });

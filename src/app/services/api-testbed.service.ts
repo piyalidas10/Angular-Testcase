@@ -10,6 +10,7 @@ export class ApiTestbedService {
   constructor(private http: HttpClient) { }
 
   getUsers(): Observable<any> {
-    return this.http.get<any>('https://jsonplaceholder.typicode.com/users');
+    // original url : https://jsonplaceholder.typicode.com/users
+    return this.http.get<any>('https://jsonplaceholder.typicode.com/user');
   }
 }

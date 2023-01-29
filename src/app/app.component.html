@@ -17,6 +17,7 @@
       <td>{{user.first_name | title: user.gender : user.married }} {{user.last_name}}</td>
       <td>{{user.email}}</td>
       <td>{{user.gender}}</td>
+      <td>{{user.married? 'Married' : 'Unmarried'}}</td>
       <td>{{user.birthdate | dateConverter}}</td>
       <td>{{user.phone_number}}</td>
     </tr>

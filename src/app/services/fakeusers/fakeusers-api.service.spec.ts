@@ -30,7 +30,7 @@ describe('FakeusersApiService', () => {
   });
 
   describe('getFakeUsers', () => {
-    it('getFakeUsers() should be called', () => {
+    it('getFakeUsers() with success', () => {
       httpClientSpy.get.and.returnValue(of(mockFakeUsers)); // call http get method
       service.getFakeUsers().subscribe((data) => { // now have to subscribe getFakeUsers method to get data
         expect(data).toEqual(mockFakeUsers);

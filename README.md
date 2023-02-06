@@ -1,5 +1,11 @@
 # Angular 12 Testcase
 
+### API URLs
+1. https://reqres.in/
+2. https://apipheny.io/free-api/
+3. https://gorest.co.in/
+
+
 ### Components Testacse
 1. user
 

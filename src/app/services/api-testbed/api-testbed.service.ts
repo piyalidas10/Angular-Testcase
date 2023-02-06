@@ -12,7 +12,7 @@ export class ApiTestbedService {
 
   getUsers(): Observable<any> {
     // original url : https://jsonplaceholder.typicode.com/users
-    return this.http.get<any>('https://jsonplaceholder.typicode.com/user').pipe(
+    return this.http.get<any>('https://jsonplaceholder.typicode.com/users').pipe(
       catchError((error: HttpErrorResponse) => {
         if (error.status === 404) {
           return of(undefined);

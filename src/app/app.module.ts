@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { TruncatePipe } from './pipes/truncate.pipe';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { UsersComponent } from './components/users/users.component';
 import { ApiService } from './services/api/api.service';
 import { ApiTestbedService } from './services/api-testbed/api-testbed.service';
@@ -18,6 +18,7 @@ import { LoaderComponent } from './components/loader/loader/loader.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found/page-not-found.component';
 import { LoginComponent } from './components/login/login/login.component';
 import { AppRoutingModule } from './routing.module';
+import { RequestHeaderInterceptor } from './interceptors/request-header/request-header.interceptor';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,9 @@ import { AppRoutingModule } from './routing.module';
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [ApiService, ApiTestbedService],
+  providers: [ApiService, ApiTestbedService,
+    // { provide: HTTP_INTERCEPTORS, useClass: RequestHeaderInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

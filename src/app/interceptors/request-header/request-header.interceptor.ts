@@ -16,7 +16,7 @@ export class RequestHeaderInterceptor implements HttpInterceptor {
   // HttpConfigInterceptor will inject header configuration to each http request.
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    if(!request.headers.has('content-type')) {
+    if(!request.headers.has('Content-type')) {
       request = request.clone({headers: request.headers.set('Content-Type', 'application/json')});
     }
     request = request.clone({headers: request.headers.set('Accept', 'application/json')});

@@ -10,6 +10,12 @@
   <input type="text">
 </label>
 
+<app-loader [isLoading]="(isLoading$ | async)" message="Loading error message ..."></app-loader>
+
+<div class="error" *ngIf="!(isLoading$ | async) && errorMsg">
+  <p> {{errorMsg}} </p>
+</div>
+
 <table class="table">
 
   <tbody>
@@ -25,5 +31,6 @@
 </table>
 
 <button (click)="createAirline()">Create Airline</button>
+
 
 

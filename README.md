@@ -23,3 +23,7 @@ https://braydoncoyer.dev/blog/how-to-unit-test-an-http-service-in-angular
 https://www.dotnetcurry.com/angularjs/unit-testing-angular-services
 
 
+https://www.scaler.com/topics/angular/angular-interceptor/
+https://javascript.plainenglish.io/angular-handle-http-errors-using-interceptors-5cc483103740
+
+

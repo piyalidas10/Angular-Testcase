@@ -14,6 +14,10 @@ import { TooltipDirective } from './directives/tooltip/tooltip.directive';
 import { TitlePipe } from './pipes/title/title.pipe';
 import { DataRangePipe } from './pipes/data-range/data-range.pipe';
 import { DateConverterPipe } from './pipes/date-converter/date-converter.pipe';
+import { LoaderComponent } from './components/loader/loader/loader.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found/page-not-found.component';
+import { LoginComponent } from './components/login/login/login.component';
+import { AppRoutingModule } from './routing.module';
 
 @NgModule({
   declarations: [
@@ -26,10 +30,14 @@ import { DateConverterPipe } from './pipes/date-converter/date-converter.pipe';
     TooltipDirective,
     TitlePipe,
     DataRangePipe,
-    DateConverterPipe
+    DateConverterPipe,
+    LoaderComponent,
+    PageNotFoundComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
+    AppRoutingModule,
     HttpClientModule
   ],
   providers: [ApiService, ApiTestbedService],

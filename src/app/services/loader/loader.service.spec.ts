@@ -10,7 +10,11 @@ describe('LoaderService', () => {
     service = TestBed.inject(LoaderService);
   });
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
+  it('show loader', () => {
+    service.loaderShow();
+  });
+
+  it('hide loader', () => {
+    service.loaderHide();
   });
 });

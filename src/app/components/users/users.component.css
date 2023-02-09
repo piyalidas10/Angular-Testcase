@@ -20,3 +20,10 @@ table{
     background-color: #04AA6D;
     color: white;
   }
+  .error {
+    background: #CC0000;
+    color: #FFFFFF;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin: 10px 0;
+  }

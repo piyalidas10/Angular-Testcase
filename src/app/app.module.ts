@@ -19,6 +19,9 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { LoginComponent } from './components/login/login/login.component';
 import { AppRoutingModule } from './routing.module';
 import { RequestHeaderInterceptor } from './interceptors/request-header/request-header.interceptor';
+import { LoaderService } from './services/loader/loader.service';
+import { ErrorShowService } from './services/error-show/error-show.service';
+import { HttpErrorHandlerInterceptor } from './interceptors/http-error-handler/http-error-handler.interceptor';
 
 @NgModule({
   declarations: [
@@ -42,7 +45,10 @@ import { RequestHeaderInterceptor } from './interceptors/request-header/request-
     HttpClientModule
   ],
   providers: [ApiService, ApiTestbedService,
+    LoaderService,
+    ErrorShowService,
     // { provide: HTTP_INTERCEPTORS, useClass: RequestHeaderInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: HttpErrorHandlerInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]
 })

@@ -10,13 +10,10 @@
   <input type="text">
 </label>
 
-<!-- <app-loader [isLoading]="(isLoading$ | async)" message="Loading error message ..."></app-loader> -->
 
-<!-- <div class="error" *ngIf="!(isLoading$ | async) && errorMsg">
-  <p> {{errorMsg}} </p>
-</div> -->
+<app-users></app-users>
 
-<table class="table">
+<!-- <table class="table">
 
   <tbody>
     <tr *ngFor="let user of fakeUsers | dataRange: 10 : 3">
@@ -28,7 +25,7 @@
       <td>{{user.phone_number}}</td>
     </tr>
   </tbody>
-</table>
+</table> -->
 
 <button (click)="createAirline()">Create Airline</button>
 

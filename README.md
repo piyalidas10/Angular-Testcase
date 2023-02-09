@@ -5,6 +5,9 @@
 2. https://apipheny.io/free-api/
 3. https://gorest.co.in/
 
+### Angular Http Caching using Interceptor and Refresh
+https://www.youtube.com/watch?v=y921lgvICnQ
+https://netbasal.com/testing-asynchronous-code-in-angular-using-fakeasync-fc777f86ed13
 
 ### Components Testacse
 1. user

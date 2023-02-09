@@ -16,3 +16,11 @@
 .table tr:hover {
   background-color: #ddd;
 }
+
+.error {
+  background: #CC0000;
+  color: #FFFFFF;
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin: 10px 0;
+}

@@ -1,5 +1,4 @@
 <h1>Angular 12 Testcase</h1>
-<!-- <app-users></app-users> -->
 <p><a appMouseBgcolorChange [colorCode]="'#ccdd00'">Mouse hover / out</a></p>
 <p><a appClickBgcolorChange [colorCode]="'#ff0000'">CLick</a></p>
 <label>
@@ -9,25 +8,20 @@
   </span>
   <input type="text">
 </label>
+<br><br><br>
+<input type="text" appCharactersOnly />
+<br>
+<input type="text" appNumbersOnly />
+<br>
+<input type="text" appAlphanumericOnly />
 
-
+<app-fake-users></app-fake-users>
 <app-users></app-users>
 
-<!-- <table class="table">
 
-  <tbody>
-    <tr *ngFor="let user of fakeUsers | dataRange: 10 : 3">
-      <td>{{user.first_name | title: user.gender : user.married }} {{user.last_name}}</td>
-      <td>{{user.email}}</td>
-      <td>{{user.gender}}</td>
-      <td>{{user.married? 'Married' : 'Unmarried'}}</td>
-      <td>{{user.birthdate | dateConverter}}</td>
-      <td>{{user.phone_number}}</td>
-    </tr>
-  </tbody>
-</table> -->
 
 <button (click)="createAirline()">Create Airline</button>
 
+<app-login></app-login>
 
 

@@ -1,0 +1,45 @@
+<div class="row">
+    <div class="col-12 col-md-4 offset-md-4">
+      <div class="card shadow-sm" *ngIf="!complete">
+        <div class="card-body">
+          <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" novalidate autocomplete="off">
+            <div class="form-group">
+              <!-- email -->
+              <label for="email" class="control-label font-weight-bold">Email</label>
+              <input type="email" class="form-control" formControlName="email" placeholder="Email address"
+                [ngClass]="{ 'is-valid': (submitted || f.email.dirty) && !f.email.errors, 'is-invalid': (submitted || f.email.dirty) && f.email.errors }">
+              <div class="invalid-feedback" *ngIf="f.email.errors">
+                <span *ngIf="f.email.errors?.required">Email address is required</span>
+                <span *ngIf="f.email.errors?.email">Email address is not valid</span>
+              </div>
+            </div>
+      
+            <!-- password -->
+            <div class="form-group">
+              <label for="password" class="control-label font-weight-bold">Password</label>
+              <input type="password" class="form-control" formControlName="password" placeholder="Choose a password" autocomplete="new-password"
+                [ngClass]="{ 'is-valid': (submitted || f.password.dirty) && !f.password.errors, 'is-invalid': (submitted || f.password.dirty) && f.password.errors }">
+              <app-password-strength [passwordToCheck]="signupForm.value.password" (passwordStrength)="onPasswordStrengthChanged($event)"></app-password-strength>
+            
+              <div class="invalid-feedback" *ngIf="f.password.errors">
+                <span *ngIf="f.password.errors?.required">Password is required</span>
+                <span *ngIf="f.password.errors?.minlength">Password must be at least 8 characters long</span>
+              </div>
+            </div>
+      
+            <button type="submit" class="btn btn-block btn-primary" [disabled]="signupForm.invalid || !strongPassword || working">
+              {{ working ? 'Working on it...' : 'Create account' }}
+            </button>
+          </form>
+        </div>
+      </div>
+  
+      <div class="card text-white bg-success shadow-sm h-100" *ngIf="complete">
+        <div class="card-header">Registration complete</div>
+        <div class="card-body">
+          <h5 class="card-title">You're all set 🐉</h5>
+          <p class="card-text">Check your inbox to confirm your account.</p>
+        </div>
+      </div>
+    </div>
+  </div>

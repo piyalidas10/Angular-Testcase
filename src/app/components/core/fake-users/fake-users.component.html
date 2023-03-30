@@ -1,0 +1,22 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email Id</th>
+      <th>Gender</th>
+      <th>Marratial tatus</th>
+      <th>DOB</th>
+      <th>Phone No</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of fakeUsers | dataRange: 10 : 3">
+      <td>{{user.first_name | title: user.gender : user.married }} {{user.last_name}}</td>
+      <td>{{user.email}}</td>
+      <td>{{user.gender}}</td>
+      <td>{{user.married? 'Married' : 'Unmarried'}}</td>
+      <td>{{user.birthdate | dateConverter}}</td>
+      <td>{{user.phone_number}}</td>
+    </tr>
+  </tbody>
+</table>

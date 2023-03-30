@@ -6,7 +6,7 @@
         <div class="error"> {{(errorMsg$ | async)}} </div>
     </ng-container>
     <ng-template #showUsers>
-        <ng-container *ngIf="data.length > 0; else noUsers">
+        <ng-container *ngIf="data && data.length > 0; else noUsers">
             <h1>User's Table</h1>
             <table>
                 <tr>

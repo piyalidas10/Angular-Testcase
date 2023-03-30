@@ -101,6 +101,11 @@ describe('ApiPostService', () => {
   });
 
   afterEach(() => {
+    /*
+      So we are going to make sure using verify that no unintended EDP requests are Triggered by safe course, 
+      the only request that we expect is this put coal and we d we have written the specification 
+      that tests the error handling behavior of the safe course method.
+    */
     httpController.verify();
   });
 });

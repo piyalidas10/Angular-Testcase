@@ -17,7 +17,7 @@ export class HttpErrorHandlerInterceptor implements HttpInterceptor {
 
   constructor(public loaderService: LoaderService, private errorShowService: ErrorShowService) { }
 
-  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+  intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     this.loaderService.loaderShow();
     return next.handle(request).pipe(
       retry(1),
@@ -29,7 +29,7 @@ export class HttpErrorHandlerInterceptor implements HttpInterceptor {
         this.errorShowService.errorMsg.next(errorMsg);
         return throwError(errorMsg);
       })
-    ) as Observable<HttpEvent<any>>;
+    ) as Observable<HttpEvent<unknown>>;
   }
 
    //  Avoid to pass the real errors to client

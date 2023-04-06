@@ -3,7 +3,7 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { fakeAsync, TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
 import { finalize, retry, tap } from 'rxjs/operators';
-import { Endpoint } from 'src/app/config/endpoint';
+import { Endpoint } from 'src/app/settings/endpoint-generate';
 import { User } from 'src/app/models/user';
 import { LoaderService } from 'src/app/services/loader/loader.service';
 

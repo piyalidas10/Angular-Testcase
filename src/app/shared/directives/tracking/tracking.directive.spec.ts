@@ -2,10 +2,10 @@ import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http'
 import { Component, CUSTOM_ELEMENTS_SCHEMA, DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { TrackingService } from '../../services/tracking/tracking.service';
+import { TrackingService } from '../../../services/tracking/tracking.service';
 import { TrackingDirective } from './tracking.directive';
-import { TrackEvent } from '../../models/track-event';
-import { mockTrackEvent } from '../../mockdata/trackEvent';
+import { TrackEvent } from '../../../models/track-event';
+import { mockTrackEvent } from '../../../mockdata/trackEvent';
 
 @Component({
   template: `<button appTracking [trackingId]="'clickbutton'">CLick</button>`

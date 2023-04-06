@@ -1,0 +1,11 @@
+<div class="loader">
+    <ng-container *ngIf="msgText">
+        <div class="msg">
+            {{msgText}}
+        </div>
+    </ng-container>
+
+    <ng-container *ngIf="isTimeup">
+        <div class="btn" (click)="close()">Close</div>
+    </ng-container>
+</div>

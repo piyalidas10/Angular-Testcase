@@ -1,5 +1,5 @@
 import { Directive, HostListener, Input } from '@angular/core';
-import { TrackingService } from '../../services/tracking/tracking.service';
+import { TrackingService } from '../../../services/tracking/tracking.service';
 
 @Directive({
   selector: '[appTracking]'

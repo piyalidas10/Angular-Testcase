@@ -1,5 +1,12 @@
 # Angular 12 Testcase
 
+### Environments
+dev - Development
+QA - environment is used by testers, QA analysts or other testing professionals to perform many forms of functional and non-functional testing. 
+SI  - System Integrator - first test of components running on different (virtual) servers actually talking together as planned
+ST - Staging - a live-like environment where a final sanity test happens before we push to live
+Prod - Production - real, paying users run the code on here.
+
 ### API URLs
 1. https://reqres.in/
 2. https://apipheny.io/free-api/

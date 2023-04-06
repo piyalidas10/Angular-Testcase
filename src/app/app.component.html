@@ -8,6 +8,8 @@
   </span>
   <input type="text">
 </label>
+<br><br>
+<h4>Mask Account no : {{accountNo}}</h4>
 <br><br><br>
 <input type="text" appCharactersOnly />
 <br>
@@ -15,10 +17,27 @@
 <br>
 <input type="text" appAlphanumericOnly />
 
-<app-fake-users></app-fake-users>
+
 <app-users></app-users>
+<br><br><br>
+<h1>Sample Table</h1>
+<table appTableStickyHeader>
+  <thead>
+      <tr>
+          <th>Name</th>
+          <th>Email Id</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr *ngFor="let user of sampleTableData | orderBy: 'name': 'desc'">
+          <td>{{user.name}}</td>
+          <td>{{user.email}}</td>
+      </tr>
+  </tbody>
+</table>
+<button (click)="addTable()">Add Table Data</button>
 
-
+<!-- <app-fake-users></app-fake-users> -->
 
 <button (click)="createAirline()">Create Airline</button>
 

@@ -8,17 +8,21 @@
     <ng-template #showUsers>
         <ng-container *ngIf="data && data.length > 0; else noUsers">
             <h1>User's Table</h1>
-            <table>
-                <tr>
-                    <th>Name</th>
-                    <th>Email Id</th>
-                    <th>Phone</th>
-                </tr>
-                <tr *ngFor="let user of data">
-                    <td>{{user.name}}</td>
-                    <td>{{user.email}}</td>
-                    <td>{{user.phone}}</td>
-                </tr>
+            <table appTableStickyHeader>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email Id</th>
+                        <th>Phone</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let user of data | orderBy: 'name': 'desc'">
+                        <td>{{user.name}}</td>
+                        <td>{{user.email}}</td>
+                        <td>{{user.phone}}</td>
+                    </tr>
+                </tbody>
             </table>
         </ng-container>
         

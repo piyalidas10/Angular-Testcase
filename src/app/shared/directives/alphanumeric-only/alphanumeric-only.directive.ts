@@ -14,7 +14,7 @@ export class AlphanumericOnlyDirective {
     return this.validateAlphanumeric(event);
   }
 
-  validateAlphanumeric(event: KeyboardEvent) {
+  validateAlphanumeric(event: any) {
     console.log('event => ', event);
     const code = event.keyCode ? event.keyCode : 0;
     if (code === 8 || code === 0) { // 8 - backspace

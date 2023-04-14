@@ -20,7 +20,7 @@ export class LoaderCustomService {
     }
   }
 
-  start(id?: string, withSubject?: boolean) {
+  start(id?: string, withSubject?: boolean): any {
     if (id) {
       if (!this._componentLoaders.get(id)) {
         this._componentLoaders.set(id, new Subject<boolean>());
@@ -34,7 +34,7 @@ export class LoaderCustomService {
     globalLoading.next(true);
   }
 
-  stop(id?: string, withSubject?: boolean) {
+  stop(id?: string, withSubject?: boolean): any {
     if (id) {
       if (!this._componentLoaders.get(id)) {
         return Error('Loader not found!');

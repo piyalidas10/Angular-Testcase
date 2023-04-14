@@ -1,0 +1,21 @@
+:host {
+    width: 100vw;
+    height: 100vh;
+    z-index: 1025;
+    position: absolute;
+    display: flex;
+    top: 0;
+    left: 0;
+}
+.loader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px;
+    flex-direction: column;
+    width: 100%;
+    max-width: 100%;
+    margin: auto;
+    z-index: 1028;
+    position: relative;
+}

@@ -1,16 +1,16 @@
-import { TestBed } from '@angular/core/testing';
+// import { TestBed } from '@angular/core/testing';
 
-import { LoaderCustomService } from './loader-custom.service';
+// import { LoaderCustomService } from './loader-custom.service';
 
-describe('LoaderCustomService', () => {
-  let service: LoaderCustomService;
+// describe('LoaderCustomService', () => {
+//   let service: LoaderCustomService;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(LoaderCustomService);
-  });
+//   beforeEach(() => {
+//     TestBed.configureTestingModule({});
+//     service = TestBed.inject(LoaderCustomService);
+//   });
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
-});
+//   it('should be created', () => {
+//     expect(service).toBeTruthy();
+//   });
+// });

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
@@ -17,6 +17,8 @@ import { FakeusersApiService } from './services/fakeusers/fakeusers-api.service'
 import { MaskDataPipe } from './shared/pipes/mask-data/mask-data.pipe';
 import { DirectivesModule } from './shared/directives/directives.module';
 import { PipesModule } from './shared/pipes/pipes.module';
+import { GlobalErrorHandler } from './services/global-error-handler/global-error-handler.service';
+import { ComponentsModule } from './shared/components/components.module';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,8 @@ import { PipesModule } from './shared/pipes/pipes.module';
     AppRoutingModule,
     HttpClientModule,
     DirectivesModule,
-    PipesModule
+    PipesModule,
+    ComponentsModule
   ],
   providers: [
     MaskDataPipe,
@@ -42,6 +45,10 @@ import { PipesModule } from './shared/pipes/pipes.module';
     FakeusersApiService,
     // { provide: HTTP_INTERCEPTORS, useClass: RequestHeaderInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: HttpErrorHandlerInterceptor, multi: true },
+    {
+      provide: ErrorHandler,
+      useClass: GlobalErrorHandler,
+    },
   ],
   bootstrap: [AppComponent]
 })

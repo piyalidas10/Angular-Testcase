@@ -9,26 +9,26 @@ import {
 } from '@angular/core';
 import { fromEvent, Subject } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
+import { WindowRefService } from '../../services/window/window-ref.service';
 
 @Directive({
   selector: '[appTableStickyHeader]',
 })
 export class TableStickyHeaderDirective implements AfterViewInit, OnDestroy {
   private _counter = 1;
-  private _tableChanges$: MutationObserver;
   private _destroySubject$ = new Subject<void>();
 
   constructor(
     private el: ElementRef<HTMLElement>,
     private renderer: Renderer2,
-    @Inject(DOCUMENT) public document: Document
+    @Inject(DOCUMENT) public document: Document,
+    private windowRef: WindowRefService // javascript window object will not work for Angular Universal (SSR)
   ) {}
 
   ngAfterViewInit(): void {
     this.createStickyHeader();
-    this.detectTableChanges();
     this.tableResize();
-    this.updateColumnsWidth();
+    this.modifyColumnsWidth();
   }
 
   createStickyHeader(): void {
@@ -47,30 +47,6 @@ export class TableStickyHeaderDirective implements AfterViewInit, OnDestroy {
     }
   }
 
-  detectTableChanges(): void {
-    this._tableChanges$ = new MutationObserver((mutations) => {
-      console.log('mutations => ', mutations);
-      // have used for loop because There is no way to stop or break a forEach() loop
-      for (const mutation of mutations) {
-        if (
-          mutation.target.nodeName === 'TBODY' ||
-          mutation.target.nodeName === 'THEAD' ||
-          mutation.target.nodeName === 'TABLE'
-        ) {
-          this.updateColumnsWidth();
-          break;
-        }
-      }
-    });
-
-    this._tableChanges$.observe(this.el.nativeElement, {
-      childList: true,
-      subtree: true,
-      attributes: true,
-      characterData: true
-    });
-  }
-
   tableResize(): void {
     if (this.document.defaultView) {
       console.log(this.document.defaultView);
@@ -78,36 +54,35 @@ export class TableStickyHeaderDirective implements AfterViewInit, OnDestroy {
         .pipe(debounceTime(1000), takeUntil(this._destroySubject$))
         .subscribe(() => {
           if (this.el && this.el.nativeElement) {
-            this.updateColumnsWidth();
+            this.modifyColumnsWidth();
           }
         });
     }
   }
 
   ngOnDestroy(): void {
-    this._tableChanges$.disconnect();
     this._destroySubject$.next();
     this._destroySubject$.complete();
   }
 
-  updateColumnsWidth(): void {
+  modifyColumnsWidth(): void {
     this.clearAllNodesStickyHeaders();
     const ths = this.el.nativeElement.querySelectorAll('thead > tr > th');
-    const firstRow = this.el.nativeElement.querySelector('tbody > tr');
-    if (ths && firstRow) {
-      const tds = firstRow.querySelectorAll('td');
+    const row = this.el.nativeElement.querySelector('tbody > tr');
+    if (ths && row) {
+      const tds = row.querySelectorAll('td');
       tds.forEach((el, i) => {
-        const header = ths[i] && window.getComputedStyle(ths[i]);
+        const header = ths[i] && this.windowRef.nativeWindow.getComputedStyle(ths[i]);
         if (header) {
           el.style.maxWidth = el.style.width = header.width;
         }
       });
-      this.renderer.setAttribute(firstRow, 'sticky-header', this._counter++ + '');
+      this.renderer.setAttribute(row, 'sticky-header', this._counter++ + '');
     }
   }
 
   private clearAllNodesStickyHeaders(): void {
-    const allStickyHeaderNodes: NodeListOf<HTMLElement> = this.getAllNodesStickyHeaders();
+    const allStickyHeaderNodes: NodeListOf<HTMLElement> = this.el.nativeElement.querySelectorAll('[sticky-header]') || [];
     allStickyHeaderNodes.forEach((stickyHeaderNode) => {
       const tds: NodeListOf<HTMLElement> = stickyHeaderNode.querySelectorAll('td');
       tds.forEach((td) => {
@@ -115,9 +90,5 @@ export class TableStickyHeaderDirective implements AfterViewInit, OnDestroy {
       });
       this.renderer.removeAttribute(stickyHeaderNode, 'sticky-header');
     });
-  }
-
-  private getAllNodesStickyHeaders(): any {
-    return this.el.nativeElement.querySelectorAll('[sticky-header]') || [];
   }
 }

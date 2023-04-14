@@ -1,0 +1,12 @@
+<ng-container *ngIf="errorData">
+  <div [ngSwitch]="errorData?.errorType">
+    <div *ngSwitchCase="'UIError'" class="error">
+      <div class="header">UI error is occurred</div>
+      <div class="msg">Please try again after sometime.</div>
+    </div>
+    <div *ngSwitchCase="'ServerError'" class="error">
+      <div class="header">{{errorData?.errorObj?.name}}</div>
+      <div class="msg">{{errorData?.errorMsg}}</div>
+    </div>
+  </div>  
+</ng-container>

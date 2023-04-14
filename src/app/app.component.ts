@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { SafeType } from './models/safe-type';
 import { User } from './models/user';
 import { ApiPostService } from './services/api-post/api-post.service';
 import { MaskDataPipe } from './shared/pipes/mask-data/mask-data.pipe';
+import { SanitizePipe } from './shared/pipes/sanitize/sanitize.pipe';
 
 @Component({
   selector: 'app-root',
@@ -18,13 +20,17 @@ export class AppComponent {
   };
   accountNo: string;
   sampleTableData: any[] = [];
+  htmlSnippet: string = "<script>safeCode()</script>";
+  videoURL: string = 'https://www.w3schools.com/html/mov_bbb.mp4';
 
   constructor(
     private apiPostService: ApiPostService,
-    private maskDataPipe: MaskDataPipe
+    private maskDataPipe: MaskDataPipe,
+    private sanitizePipe: SanitizePipe
   ) {
     this.accountNo = this.maskDataPipe.transform('1234567890', '*', 3, 6);
     this.sampleTable();
+    console.log('sanitizePipe => ', this.sanitizePipe.transform(`<a href="javascript:alert('hello')">click</a>`, SafeType.HTML));
   }
 
   ngOnInit() {}

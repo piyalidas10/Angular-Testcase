@@ -33,6 +33,10 @@ export class UsersComponent implements OnInit {
     this.errorMsg$ = this.errorShowService.errorMsg$;
   }
 
+  trackByID(index: number, user: User): number {
+    return user.id;
+  } 
+
   callUsers() {
     this.apiService
       .getUsers()

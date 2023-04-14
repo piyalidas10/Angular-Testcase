@@ -17,7 +17,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let user of data | orderBy: 'name': 'desc'">
+                    <tr *ngFor="let user of data | orderBy: 'name': 'desc'; trackBy:trackByID">
                         <td>{{user.name}}</td>
                         <td>{{user.email}}</td>
                         <td>{{user.phone}}</td>

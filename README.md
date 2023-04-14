@@ -5,7 +5,16 @@ dev - Development
 QA - environment is used by testers, QA analysts or other testing professionals to perform many forms of functional and non-functional testing. 
 SI  - System Integrator - first test of components running on different (virtual) servers actually talking together as planned
 ST - Staging - a live-like environment where a final sanity test happens before we push to live
+UAT - User acceptance testing - also called staging environments—allow the application's main users to test new features before they are pushed into the production environment.
 Prod - Production - real, paying users run the code on here.
+
+### Ng-India
+https://www.youtube.com/watch?v=caYgrkXCG5s
+https://www.youtube.com/watch?v=Yaimk5Z22sA
+
+### Authtoken
+https://jasonwatmore.com/post/2020/09/21/angular-10-facebook-login-tutorial-example
+https://www.angulararchitects.io/aktuelles/authentication-in-angular-2-with-oauth2-oidc/
 
 ### API URLs
 1. https://reqres.in/

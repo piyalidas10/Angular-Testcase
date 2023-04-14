@@ -20,6 +20,17 @@ export class RequestHeaderInterceptor implements HttpInterceptor {
       request = request.clone({headers: request.headers.set('Content-Type', 'application/json')});
     }
     request = request.clone({headers: request.headers.set('Accept', 'application/json')});
+    
+    // add auth header with jwt if account is logged in and request is to the api url
+    // const account = this.accountService.accountValue;
+    // const isLoggedIn = account?.token;
+    // const isApiUrl = request.url.startsWith(environment.apiUrl);
+    // if (isLoggedIn && isApiUrl) {
+    //     request = request.clone({
+    //         setHeaders: { Authorization: `Bearer ${account.token}` }
+    //     });
+    // }
+    
     return next.handle(request).pipe(
       map((event: HttpEvent<any>) => {
         return event;

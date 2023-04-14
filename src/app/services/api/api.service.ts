@@ -14,7 +14,7 @@ export class ApiService {
 
   getUsers(): Observable<User[]> {
     this.users = this.http
-      .get<User[]>(`https://jsonplaceholder.typicode.com/users`)
+      .get<User[]>(`https://jsonplaceholder.typicode.com/user`)
     return this.users;
   }
 

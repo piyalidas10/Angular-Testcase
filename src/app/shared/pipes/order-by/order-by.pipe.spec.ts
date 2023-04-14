@@ -1,10 +1,14 @@
+import { TestBed } from '@angular/core/testing';
 import { mockUsers, mockUsersOrderByAsc, mockUsersOrderByDesc } from 'src/app/mockdata/users';
 import { OrderByPipe } from './order-by.pipe';
 
 describe('OrderByPipe', () => {
   let pipe: OrderByPipe;
   beforeEach(() => {
-    pipe = new OrderByPipe();
+    TestBed.configureTestingModule({
+      providers: [OrderByPipe]
+    })
+    pipe = TestBed.inject(OrderByPipe);
   });
   it('create an instance', () => {
     expect(pipe).toBeTruthy();

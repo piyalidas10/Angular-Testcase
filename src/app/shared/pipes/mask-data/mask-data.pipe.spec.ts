@@ -1,9 +1,13 @@
+import { TestBed } from '@angular/core/testing';
 import { MaskDataPipe } from './mask-data.pipe';
 
 describe('MaskDataPipe', () => {
   let pipe: MaskDataPipe;
   beforeEach(() => {
-    pipe = new MaskDataPipe();
+    TestBed.configureTestingModule({
+      providers: [MaskDataPipe]
+    })
+    pipe = TestBed.inject(MaskDataPipe);
   });
   it('create an instance', () => {
     expect(pipe).toBeTruthy();

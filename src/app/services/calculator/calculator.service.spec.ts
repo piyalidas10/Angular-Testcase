@@ -2,13 +2,19 @@ import { TestBed } from '@angular/core/testing';
 
 import { CalculatorService } from './calculator.service';
 import { LoggerService } from '../logger/logger.service';
+import { TrackingService } from '../tracking/tracking.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('CalculatorService', () => {
   let calculatorSrv: CalculatorService;
+  let trackingSrv: TrackingService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+        imports: [HttpClientTestingModule],
+    });
     calculatorSrv = TestBed.inject(CalculatorService);
+    trackingSrv = TestBed.inject(TrackingService);
   });
 
   it('should be created', () => {
@@ -18,7 +24,7 @@ describe('CalculatorService', () => {
   /* spyOn use */
   it('should add two numbers', () => {
     console.log('Add Calculator');
-    const logger = new LoggerService(); // Here we create a new instance of logger service
+    const logger = new LoggerService(trackingSrv); // Here we create a new instance of logger service
     /*
       *****  spyOn(logger, 'log'); *****
 
@@ -68,7 +74,7 @@ describe('CalculatorService', () => {
 
   it('should substract two numbers', () => {
     console.log('Subtract Calculator');
-    const logger = new LoggerService(); // Here we create a new instance of logger service
+    const logger = new LoggerService(trackingSrv); // Here we create a new instance of logger service
     spyOn(logger, 'log'); // will not call the log method
     // spyOn(logger, 'log').and.callThrough(); // will call original log method
     const calculator = new CalculatorService(logger);

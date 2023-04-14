@@ -10,6 +10,10 @@
 </label>
 <br><br>
 <h4>Mask Account no : {{accountNo}}</h4>
+<br><br>
+<h4>Dom Sanitizer</h4>
+<div [innerHtml]="htmlSnippet | sanitize: 'html'"></div>
+<video width="50%" controls [src]="videoURL | sanitize: 'resourceUrl'"></video>
 <br><br><br>
 <input type="text" appCharactersOnly />
 <br>

@@ -7,6 +7,7 @@ import { MaskDataPipe } from './mask-data/mask-data.pipe';
 import { DateConverterPipe } from './date-converter/date-converter.pipe';
 import { DataRangePipe } from './data-range/data-range.pipe';
 import { AgeRangeFilterPipe } from './age-range-filter/age-range-filter.pipe';
+import { SanitizePipe } from './sanitize/sanitize.pipe';
 
 @NgModule({
   declarations: [
@@ -16,10 +17,14 @@ import { AgeRangeFilterPipe } from './age-range-filter/age-range-filter.pipe';
     MaskDataPipe,
     OrderByPipe,
     TitlePipe,
-    TruncatePipe
+    TruncatePipe,
+    SanitizePipe
   ],
   imports: [
     CommonModule
+  ],
+  providers: [
+    SanitizePipe
   ],
   exports: [
     AgeRangeFilterPipe,
@@ -28,7 +33,8 @@ import { AgeRangeFilterPipe } from './age-range-filter/age-range-filter.pipe';
     MaskDataPipe,
     OrderByPipe,
     TitlePipe,
-    TruncatePipe
+    TruncatePipe,
+    SanitizePipe
   ]
 })
 export class PipesModule { }

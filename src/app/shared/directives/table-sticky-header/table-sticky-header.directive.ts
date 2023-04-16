@@ -21,7 +21,7 @@ export class TableStickyHeaderDirective implements AfterViewInit, OnDestroy {
 
   constructor(
     private el: ElementRef<HTMLElement>,
-    private renderer: Renderer2,
+    private renderer2: Renderer2,
     @Inject(DOCUMENT) public document: Document,
     private windowRef: WindowRefService // javascript window object will not work for Angular Universal (SSR)
   ) {}
@@ -36,15 +36,15 @@ export class TableStickyHeaderDirective implements AfterViewInit, OnDestroy {
     const thead = this.el.nativeElement.querySelector('thead');
     const tbody = this.el.nativeElement.querySelector('tbody');
     if (thead) {
-      thead.style.display = 'table';
-      thead.style.position = 'sticky';
-      thead.style.width = '100%';
-      thead.style.top = '0';
-      thead.style.zIndex = '1';
+      this.renderer2.setStyle(thead, 'display', 'table');
+      this.renderer2.setStyle(thead, 'position', 'sticky');
+      this.renderer2.setStyle(thead, 'width', '100%');
+      this.renderer2.setStyle(thead, 'top', '0');
+      this.renderer2.setStyle(thead, 'zIndex', '1');
     }
     if (tbody) {
-      tbody.style.display = 'table';
-      tbody.style.width = '100%';
+      this.renderer2.setStyle(tbody, 'display', 'table');
+      this.renderer2.setStyle(tbody, 'width', '100%');
     }
   }
 
@@ -79,10 +79,11 @@ export class TableStickyHeaderDirective implements AfterViewInit, OnDestroy {
         tds.forEach((el, i) => {
           const header = ths[i] && this.windowRef.nativeWindow.getComputedStyle(ths[i]);
           if (header) {
-            el.style.maxWidth = el.style.width = header.width;
+            this.renderer2.setStyle(el, 'maxWidth', header.width);
+            this.renderer2.setStyle(el, 'width', header.width);
           }
         });
-        this.renderer.setAttribute(row, 'sticky-header', this._counter++ + '');
+        this.renderer2.setAttribute(row, 'sticky-header', this._counter++ + '');
       }
     }
   }
@@ -93,9 +94,10 @@ export class TableStickyHeaderDirective implements AfterViewInit, OnDestroy {
       this.allStickyHeaderNodes.forEach((stickyHeaderNode) => {
         const tds: NodeListOf<HTMLElement> = stickyHeaderNode.querySelectorAll('td');
         tds.forEach((td) => {
-          td.style.maxWidth = td.style.width = 'auto';
+          this.renderer2.setStyle(td, 'maxWidth', 'auto');
+          this.renderer2.setStyle(td, 'width', 'auto');
         });
-        this.renderer.removeAttribute(stickyHeaderNode, 'sticky-header');
+        this.renderer2.removeAttribute(stickyHeaderNode, 'sticky-header');
       });
     }
   }

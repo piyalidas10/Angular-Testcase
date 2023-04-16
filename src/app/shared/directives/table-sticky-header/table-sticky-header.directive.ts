@@ -17,6 +17,7 @@ import { WindowRefService } from '../../services/window/window-ref.service';
 export class TableStickyHeaderDirective implements AfterViewInit, OnDestroy {
   private _counter = 1;
   private _destroySubject$ = new Subject<void>();
+  private allStickyHeaderNodes: NodeListOf<HTMLElement> | [] = [];
 
   constructor(
     private el: ElementRef<HTMLElement>,
@@ -48,14 +49,17 @@ export class TableStickyHeaderDirective implements AfterViewInit, OnDestroy {
   }
 
   tableResize(): void {
+    /*
+     document.defaultView returns the window object associated with a document, or null if none is available
+     var def_view = document.defaultView;
+     var width = def_view.innerWidth;
+     var height = def_view.innerHeight;
+    */ 
     if (this.document.defaultView) {
-      console.log(this.document.defaultView);
       fromEvent(this.document.defaultView, 'resize')
         .pipe(debounceTime(1000), takeUntil(this._destroySubject$))
         .subscribe(() => {
-          if (this.el && this.el.nativeElement) {
-            this.modifyColumnsWidth();
-          }
+          this.modifyColumnsWidth();
         });
     }
   }
@@ -66,29 +70,33 @@ export class TableStickyHeaderDirective implements AfterViewInit, OnDestroy {
   }
 
   modifyColumnsWidth(): void {
-    this.clearAllNodesStickyHeaders();
-    const ths = this.el.nativeElement.querySelectorAll('thead > tr > th');
-    const row = this.el.nativeElement.querySelector('tbody > tr');
-    if (ths && row) {
-      const tds = row.querySelectorAll('td');
-      tds.forEach((el, i) => {
-        const header = ths[i] && this.windowRef.nativeWindow.getComputedStyle(ths[i]);
-        if (header) {
-          el.style.maxWidth = el.style.width = header.width;
-        }
-      });
-      this.renderer.setAttribute(row, 'sticky-header', this._counter++ + '');
+    if (this.el && this.el.nativeElement) {
+      this.clearAllNodesStickyHeaders();
+      const ths = this.el.nativeElement.querySelectorAll('thead > tr > th');
+      const row = this.el.nativeElement.querySelector('tbody > tr');
+      if (ths && row) {
+        const tds = row.querySelectorAll('td');
+        tds.forEach((el, i) => {
+          const header = ths[i] && this.windowRef.nativeWindow.getComputedStyle(ths[i]);
+          if (header) {
+            el.style.maxWidth = el.style.width = header.width;
+          }
+        });
+        this.renderer.setAttribute(row, 'sticky-header', this._counter++ + '');
+      }
     }
   }
 
   private clearAllNodesStickyHeaders(): void {
-    const allStickyHeaderNodes: NodeListOf<HTMLElement> = this.el.nativeElement.querySelectorAll('[sticky-header]') || [];
-    allStickyHeaderNodes.forEach((stickyHeaderNode) => {
-      const tds: NodeListOf<HTMLElement> = stickyHeaderNode.querySelectorAll('td');
-      tds.forEach((td) => {
-        td.style.maxWidth = td.style.width = 'auto';
+    this.allStickyHeaderNodes = this.el.nativeElement.querySelectorAll('[sticky-header]') || [];
+    if (this.allStickyHeaderNodes && this.allStickyHeaderNodes.length > 0) {
+      this.allStickyHeaderNodes.forEach((stickyHeaderNode) => {
+        const tds: NodeListOf<HTMLElement> = stickyHeaderNode.querySelectorAll('td');
+        tds.forEach((td) => {
+          td.style.maxWidth = td.style.width = 'auto';
+        });
+        this.renderer.removeAttribute(stickyHeaderNode, 'sticky-header');
       });
-      this.renderer.removeAttribute(stickyHeaderNode, 'sticky-header');
-    });
+    }
   }
 }

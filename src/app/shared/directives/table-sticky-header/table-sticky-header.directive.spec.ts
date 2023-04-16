@@ -1,10 +1,14 @@
 import { Component, DebugElement } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+  ComponentFixture,
+  fakeAsync,
+  TestBed,
+  tick,
+} from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { TableStickyHeaderDirective } from './table-sticky-header.directive';
-import { fromEvent, of } from 'rxjs';
-import * as rxjs from 'rxjs';
+import { mocktabledata, mocktableheader } from 'src/app/mockdata/mocktabledata';
 
 @Component({
   template: `
@@ -17,9 +21,37 @@ import * as rxjs from 'rxjs';
         </tr>
       </thead>
       <tbody>
+        <tr sticky-header="2">
+          <td>Default</td>
+          <td>Defaultson</td>
+          <td>def@somemail.com</td>
+        </tr>
+        <tr>
+          <td>Success</td>
+          <td>Doe</td>
+          <td>john@example.com</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table appTableStickyHeader>
+      <thead>
+        <tr>
+          <th *ngFor="let header of headers">
+            {{ header }}
+          </th>
+        </tr>
+      </thead>
+      <tbody>
         <tr *ngFor="let row of data">
-          <td *ngFor="let cell of row">
-            {{ cell }}
+          <td>
+            {{ row.Firstname }}
+          </td>
+          <td>
+            {{ row.Lastname }}
+          </td>
+          <td>
+            {{ row.Email }}
           </td>
         </tr>
       </tbody>
@@ -28,16 +60,11 @@ import * as rxjs from 'rxjs';
   styles: ['* { box-sizing: border-box; }'],
 })
 class TestComponent {
-  headers: string[] = ['Col 1', 'Col 2', 'Col 3', 'Col 4'];
-  data: string[][] = [];
+  headers: string[] = mocktableheader;
+  data;
 
   constructor() {
-    for (let i = 0; i <= 1; i++) {
-      this.data[i] = [];
-      for (let j = 0; j < 5; j++) {
-        this.data[i][j] = `row ${i}-${j}`;
-      }
-    }
+    this.data = mocktabledata;
   }
 }
 
@@ -65,10 +92,6 @@ describe('TableStickyHeaderDirective', () => {
     fixture.detectChanges();
   });
 
-  it('should create an instance', () => {
-    expect(directive).toBeTruthy();
-  });
-
   it('should set sticky headers with thead', () => {
     expect(thead.style.display).toBe('table');
     expect(thead.style.position).toBe('sticky');
@@ -82,13 +105,9 @@ describe('TableStickyHeaderDirective', () => {
     expect(tbody.style.width).toBe('100%');
   });
 
-  // it('should trigger tableResize method when window is resized', () => {
-  //   spyOnProperty(rxjs, 'fromEvent').and.returnValue(() => rxjs.of({}));
-  //   const resize$ = fromEvent(doc.defaultView as Window, 'resize');
-  //   resize$.subscribe(() => {
-  //     spyOn(directive, 'modifyColumnsWidth');
-  //   });
-    
-  // });
-
+  it('should set sticky headers with to tbody', fakeAsync(() => {
+    fixture.detectChanges(); // render
+    table.dispatchEvent(new Event("resize"));
+    tick(1000);
+  }));
 });
